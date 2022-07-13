@@ -1,0 +1,42 @@
+#use "libs/uwn"
+
+Var True_Hate 
+
+Var Hate_Functions
+Bool _Overwrite = False
+
+QuickMeta _Module_Hate
+
+	newindex
+		key = key:upper()
+		If key=="OVERWRITE"
+			_Overwrite = Value		
+		Elseif Hate_Functions[key] == "UNDEFINED"
+			Hate_Functions[key] = Value
+		ElseIf Overwrite && Hate_Functions[key]
+			Hate_Functions[key] = Value		
+		ElseIf !Hate_Functions[key]
+			Lua.error("I do not know anything about "..key)
+		Else
+			Lua.error("Hate defition error: "..key.." -> "..Lua.tostring(key)
+		End
+	End
+
+	Index
+		key = key:upper()
+		If key=="OVERWRITE"
+			Return _OverWrite
+		ElseIf Hate_Functions[key] == "UNDEFINED"
+			Lua.error("Undefined HATE portion!")
+		ElseIf Hate_Functions[key]
+			Return Hate_Functions[key]
+		Else
+			True_Hate = True_Hate || UWN("Libs/Hate/Parts")
+			Return True_Hate[key]
+		End
+	End
+
+End
+
+
+Return _Module_Hate
