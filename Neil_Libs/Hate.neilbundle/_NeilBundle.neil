@@ -5,6 +5,14 @@ Var True_Hate
 Var Hate_Functions
 Bool _Overwrite = False
 
+Void _Flow()
+End
+
+Bool FunctionMust = False
+
+Void _Niks()
+End
+
 QuickMeta _Module_Hate
 
 	newindex
@@ -13,12 +21,12 @@ QuickMeta _Module_Hate
 			_Overwrite = Value		
 		Elseif Hate_Functions[key] == "UNDEFINED"
 			Hate_Functions[key] = Value
-		ElseIf Overwrite && Hate_Functions[key]
+		ElseIf _Overwrite && Hate_Functions[key]
 			Hate_Functions[key] = Value		
 		ElseIf !Hate_Functions[key]
 			Lua.error("I do not know anything about "..key)
 		Else
-			Lua.error("Hate defition error: "..key.." -> "..Lua.tostring(key)
+			Lua.error("Hate defition error: "..key.." -> "..Lua.tostring(key))
 		End
 	End
 
@@ -26,16 +34,26 @@ QuickMeta _Module_Hate
 		key = key:upper()
 		If key=="OVERWRITE"
 			Return _OverWrite
+		ElseIf key=="FLOW"
+			Return _Flow
 		ElseIf Hate_Functions[key] == "UNDEFINED"
-			Lua.error("Undefined HATE portion!")
+			Lua.assert(!FunctionMust,"Undefined HATE portion!")
+			return _Niks
 		ElseIf Hate_Functions[key]
 			Return Hate_Functions[key]
 		Else
-			True_Hate = True_Hate || UWN("Libs/Hate/Parts")
+			True_Hate = True_Hate || UWN("Libs/Hate.NeilBundle/Parts")
 			Return True_Hate[key]
 		End
 	End
 
+End
+
+Init	
+	Hate_Functions = {}
+	For k in Each{"Update","Draw"}
+		Hate_Functions[k:upper()]="UNDEFINED"
+	End
 End
 
 

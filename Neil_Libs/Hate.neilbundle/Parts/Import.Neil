@@ -1,0 +1,53 @@
+
+Var _Import(string dir,string file)
+	if suffixed(file:upper(),".LHL")
+		return(dir,file.."/"..replace(file:upper(),".LHL",".LUA"))
+	end
+	String Own = sprintf("%s/%s",dir,file)
+	String HTe = sprintf("Libs/Hate.NeilBundle/Hate/%s",file)
+	String UseFile
+	If dir==""
+		Own = file
+	End
+	Var Lines
+	if dir:upper()!="HOME"
+		for F in each{Own,HTe}
+			cout("Checking: ",F,"\n")
+			if JCR6.EntryExists(F)
+				print("= Loading")
+				Lines = JCR6.LoadLines(F)
+				break
+			end
+		end
+	end
+	If (!Lines) && HomeFile.Exists(file)
+		cout("Home Loading: ",file,"\n")
+		Lines = HomeFile.LoadLines(file)
+	End
+	Lua.assert(Lines,"Unable to read "..file.." in any way")
+	string Code
+	print("= Pre-processing")
+	For ln,l in ipairs(Lines)
+		string lt = trim(l)
+		If prefixed(lt,"-- *")
+			Var CD = Split(lt," ")			
+			Switch CD[2]:lower()
+				Case "*import"
+					code += sprintf("%s = Neil.Globals.Hate.Import('%s','%s.lhl')\n",CD[3],dir,CD[3])
+				Default 
+					Lua.error("Unknown hate preprocccssor directive: "..CD[2].." in line #"..ln)
+			End
+		Else
+			code += l.."\n"
+		End
+	End
+	Var Loaded
+	Var Err
+	print("= Compiling")
+	Loaded,Err = Lua.load(code,file)
+	Lua.assert(Loaded,"Hate Import error: "..Lua.tostring(Err))
+	print("= Complete")
+	Return Loaded()
+End
+
+Return _Import
