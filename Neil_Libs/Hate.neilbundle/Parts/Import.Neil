@@ -32,7 +32,11 @@ Var _Import(string dir,string file)
 	Lua.assert(Lines,"Unable to read "..file.." in any way")
 	string Code
 	print("= Pre-processing")
+	bool condout
 	For ln,l in ipairs(Lines)
+		If condout
+			code+="-- "
+		End
 		string lt = trim(l)
 		If prefixed(lt,"-- *")
 			Var CD = Split(lt," ")			
@@ -45,6 +49,18 @@ Var _Import(string dir,string file)
 				Case "*undef"
 					code += "-- UNDEFINED: "..CD[3]
 					_conditions[CD[3]:upper()]=nil
+				case "*if"
+					code +="-- if\n" 
+					bool allow=true
+					for i,k in ipairs(CD)
+						if i>2
+							allow = allow && (_conditions[k:upper()]==true)
+						end
+					end
+					condout=!allow
+				case "*endif" "*fi"
+					condout=false
+					code += "-- fi\n"
 				Default 
 					Lua.error("Unknown hate preprocccssor directive: "..CD[2].." in line #"..ln)
 			End
@@ -52,9 +68,11 @@ Var _Import(string dir,string file)
 			code += l.."\n"
 		End
 	End
+	Lua.assert(!condout,"Unclosed *if")
 	Var Loaded
 	Var Err
 	print("= Compiling")
+	// print(code) // debug only!
 	Loaded,Err = Lua.load(code,file)
 	Lua.assert(Loaded,"Hate Import error: "..Lua.tostring(Err))
 	print("= Complete")
