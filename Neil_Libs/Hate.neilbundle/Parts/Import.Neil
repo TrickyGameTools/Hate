@@ -1,7 +1,12 @@
 
+Var _conditions
+Init
+	_conditions = {}
+End
+
 Var _Import(string dir,string file)
 	if suffixed(file:upper(),".LHL")
-		return(dir,file.."/"..replace(file:upper(),".LHL",".LUA"))
+		return _Import(dir,file.."/"..replace(file:upper(),".LHL",".LUA"))
 	end
 	String Own = sprintf("%s/%s",dir,file)
 	String HTe = sprintf("Libs/Hate.NeilBundle/Hate/%s",file)
@@ -34,6 +39,12 @@ Var _Import(string dir,string file)
 			Switch CD[2]:lower()
 				Case "*import"
 					code += sprintf("%s = Neil.Globals.Hate.Import('%s','%s.lhl')\n",CD[3],dir,CD[3])
+				Case "*define" 
+					code += "-- DEFINED: "..CD[3]
+					_conditions[CD[3]:upper()]=true
+				Case "*undef"
+					code += "-- UNDEFINED: "..CD[3]
+					_conditions[CD[3]:upper()]=nil
 				Default 
 					Lua.error("Unknown hate preprocccssor directive: "..CD[2].." in line #"..ln)
 			End
