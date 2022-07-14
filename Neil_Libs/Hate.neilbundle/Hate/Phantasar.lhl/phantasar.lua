@@ -37,7 +37,7 @@
 
 
 local r ={}
-local mylogo = LoadImage("$$mydir$$/LOGO.PNG")-- love.graphics.newImage("$$mydir$$/LOGO.PNG")
+local mylogo = LoadImage("$$mydir$$/LOGO.PNG")-- hate.graphics.newImage("$$mydir$$/LOGO.PNG")
 assert(mylogo,"$$mydir$$/LOGO.PNG was not setup at all somehow")
 assert(mylogo.image,"$$mydir$$/LOGO.PNG was not loaded somehow")
 
@@ -58,10 +58,10 @@ function r.after(a)
 end
 
 function r.draw()
-local ww --= love.window.getWidth()
-local wh --= love.window.getHeight()
+local ww --= hate.window.getWidth()
+local wh --= hate.window.getHeight()
 local wf
-ww,wh,wf = love.window.getMode()
+ww,wh,wf = hate.window.getMode()
 local cx = ww/2
 local cy = wh/2
 local iw = mylogo.image:getWidth()
@@ -69,25 +69,25 @@ local ih = mylogo.image:getHeight()
 local dx = cx - (iw/2)
 local dy = cy - (ih/2)
 CLS()
-DrawImage(mylogo,dx,dy) -- old love.graphics.draw(mylogo,dx,dy)
+DrawImage(mylogo,dx,dy) -- old hate.graphics.draw(mylogo,dx,dy)
 Color(50,50,50)
 Rect(50,wh-50,ww-100,25)
 Color(r.barcol[1],r.barcol[2],r.barcol[3])
 Rect(51,(wh-50)+1,r.barsize,23)
 Color(255,255,255)
-love.graphics.print(r.procent.."%",ww/2,wh-45)
+hate.graphics.print(r.procent.."%",ww/2,wh-45)
 -- *if dev_screen
-love.graphics.print("Screen Size: "..ww.."x"..wh,0,0)
+hate.graphics.print("Screen Size: "..ww.."x"..wh,0,0)
 -- *if dev_shownum
-love.graphics.print("Processing: "..r.process.." of "..r.total,0,15)
+hate.graphics.print("Processing: "..r.process.." of "..r.total,0,15)
 -- *fi 
 end
 
 function r.update()
-local ww --= love.window.getWidth()
-local wh --= love.window.getHeight()
+local ww --= hate.window.getWidth()
+local wh --= hate.window.getHeight()
 local wf
-ww,wh,wf = love.window.getMode()
+ww,wh,wf = hate.window.getMode()
 if r.process>=r.total then
    for f in each(afteraction) do
        -- *if dev_after
@@ -111,11 +111,11 @@ local croll = r.roll[r.process]
                r.retdata[croll[2]] = LoadSound(croll[3],croll[4] or false,croll[5] or 'static')       
               end   ,
       font  = function()
-               if love.filesystem.isFile(croll[3].."_size.lua") then
+               if hate.filesystem.isFile(croll[3].."_size.lua") then
                   size = j_love_import(croll[3].."_size.lua")
-                  r.retdata[croll[2]] = love.graphics.newFont( croll[3], size )
+                  r.retdata[croll[2]] = hate.graphics.newFont( croll[3], size )
                else   
-                  r.retdata[croll[2]] = love.graphics.newFont( croll[3] )
+                  r.retdata[croll[2]] = hate.graphics.newFont( croll[3] )
                end   
               end                                  
       
@@ -138,7 +138,7 @@ end
 
 function r.adddir(assetlist,dtype,dir,prefix)
 print("Must add dir "..dir.." to "..dtype)
-local list = love.filesystem.getDirectoryItems( dir )
+local list = hate.filesystem.getDirectoryItems( dir )
 local tag,st
 for file in each(list) do
     assetlist[dtype] = assetlist[dtype] or {}
