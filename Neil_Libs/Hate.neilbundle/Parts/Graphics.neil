@@ -18,6 +18,23 @@
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
 
+class __Hate_Image
+	ReadOnly Var Img
+	
+	Int getWidth(a)
+		return (a || self).Width
+	End
+
+	Int getHeight(a)
+		return (a || self).Height
+	End
+
+	
+	Constructor (_Img)
+		Img = _Img
+	End
+end	
+
 
 Module
 	ReadOnly Delegate Line = Graphics.Line
@@ -33,4 +50,9 @@ Module
 		// Note r, sx, sy, ox, oy, kx and ky are not supposrted
 		ChosenFont.IFont.Text(Text,math.floor(x),math.floor(y))
 	End
+	
+	Var newImage( string filename, settings )
+		return new __Hate_Image(Image.LoadNew(filename,"HATE_IMAGE_"..(filename:upper())))
+	End
+	
 End
