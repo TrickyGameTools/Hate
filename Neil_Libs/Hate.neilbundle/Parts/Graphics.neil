@@ -1,0 +1,17 @@
+
+
+Module
+	ReadOnly Delegate Line = Graphics.Line
+	ReadOnly Delegate setColor = Graphics.Color
+	ReadOnly Delegate Clear = Graphics.Cls
+	
+	Get Var ChosenFont
+		Return Hate.Font.ChosenFont
+	End
+	
+	
+	Void Print(string text, number x, number y, r, sx, sy, ox, oy, kx, ky )
+		// Note r, sx, sy, ox, oy, kx and ky are not supposrted
+		ChosenFont.IFont.Text(Text,math.floor(x),math.floor(y))
+	End
+End

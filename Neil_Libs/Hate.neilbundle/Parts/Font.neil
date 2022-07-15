@@ -1,0 +1,40 @@
+Var __DefaultFont = ImageFont.Load("Libs/Hate.neilbundle/Assets/DOS_Font.jfbf" ,"__HATE_DOSFONT")
+
+Class Hate_Font
+	ReadOnly Var IFont
+	
+	Constructor(A)
+		switch Lua.type(A)
+			case "table"
+				IFont = A
+			case "string"
+				IFont = ImageFont.LoadNew(A,"__HATE__FONT__"..(A:upper()))
+			default
+				Lua.error("Unknown font creation type")
+		end
+	End
+	
+End
+
+
+Module
+	Var _DefaultFont = new Hate_Font(__DefaultFont)
+	Var _CFont
+	
+	Get Var ChosenFont
+		_CFont = _CFont || _DefaultFont
+	End
+	
+	Set Var ChosenFont
+		_CFont = Value || _DefaultFont
+	End
+	
+	Var newFont(string file)
+		return new Hate_Font(file)
+	End
+	
+	Void setFont(fnt)
+		ChosenFont = fnt
+	End
+	
+End
