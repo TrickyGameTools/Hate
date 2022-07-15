@@ -84,7 +84,23 @@ Var _Import(string dir,string file)
 					Lua.error("Unknown hate preprocccssor directive: "..CD[2].." in line #"..ln)
 			End
 		Else
-			code += l.."\n"
+			//string nl = replace(l,"\\$\\$mydir\\$\\$",MyDir).."\n"
+			string nl = ""
+			int i=1
+			repeat				
+				//print(i,(i+9<#l) , mid(l,i,9):upper(),mid(l,i,9):upper()=="$$MYDIR$$",(i+9<#l) && mid(l,i,9):upper()=="$$MYDIR$$") // debug only
+				if (i+9<#l) && mid(l,i,9):upper()=="$$MYDIR$$"
+					nl+=MyDir
+					i+=9
+				elseif mid(l,i,1)!="\n" && mid(l,i,1)!="\r"
+					nl+=mid(l,i,1)
+					i++
+				else
+					i+=(#l)
+				end
+			loopwhile i<=#l
+			// print("New Line>",ln,nl) // debug only!
+			code += nl.."\n"
 		End
 	End
 	Lua.assert(!condout,"Unclosed *if")
