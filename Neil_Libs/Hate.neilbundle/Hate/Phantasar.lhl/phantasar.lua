@@ -32,8 +32,8 @@
 -- *undef dev_shownum
 -- *undef dev_after
 
---mkl.version("Love Lua Libraries (LLL) - phantasar.lua","17.11.18")
---mkl.lic    ("Love Lua Libraries (LLL) - phantasar.lua","ZLib License")
+mkl.version("Love Lua Libraries (LLL) - phantasar.lua","17.11.18")
+mkl.lic    ("Love Lua Libraries (LLL) - phantasar.lua","ZLib License")
 
 
 local r ={}

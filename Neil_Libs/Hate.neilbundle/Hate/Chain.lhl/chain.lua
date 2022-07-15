@@ -20,7 +20,8 @@
 
 -- Converted from love to hate!
 
--- *import mkl_version
+-- -- *import mkl_version
+-- *import mkl
 
 -- *if ignore
 local hate = {}   -- This was only meant to fool the outliner in my Lua IDE.

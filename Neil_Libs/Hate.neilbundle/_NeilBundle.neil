@@ -6,6 +6,7 @@ Var Hate_Functions
 Bool _Overwrite = False
 
 Void _Flow()
+	Lua.Crash("I cannot flow yet!") // Placeholder
 End
 
 Bool FunctionMust = False
@@ -51,7 +52,7 @@ End
 
 Init	
 	Hate_Functions = {}
-	For k in Each{"Update","Draw"}
+	For k in Each{"Update","Draw","MouseMoved","KeyPressed","KeyReleased","MousePressed","MouseReleased","Quit"}
 		Hate_Functions[k:upper()]="UNDEFINED"
 	End
 End
