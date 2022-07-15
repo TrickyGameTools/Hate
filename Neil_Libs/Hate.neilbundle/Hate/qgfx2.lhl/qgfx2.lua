@@ -35,6 +35,9 @@ function LoadImage(file)
               }
   if type(file)=='string' then
      if hate.filesystem.isDirectory(file:upper()) then
+        print("Loading bundle: ",file) -- debug only
+     	-- Please note that this is a leftover from something Apollo DOES support
+     	-- And LOVE2D did not. It might be possible I'll replace this later for better workout
        local files = hate.filesystem.getDirectoryItems( file:upper() )
        table.sort(files)
        local l = {}    ret.images = l
@@ -62,10 +65,12 @@ function LoadImage(file)
           else   ret.oy = h.C("Y").tonumber() or 0 end
        end   
      else    
+       print("Loading single: "..file) -- debug only
        ret.images = {hate.graphics.newImage(upper(file))}
        if not ret.images[1] then return end
      end   
   else 
+     print("Converting to image",file) -- debug only
      ret.images={file} 
   end
   ret.image=ret.images[1]            
