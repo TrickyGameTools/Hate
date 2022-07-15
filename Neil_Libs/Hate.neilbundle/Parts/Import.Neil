@@ -19,11 +19,25 @@
 // End License Information
 
 Var _conditions
+Var _Imported
 Init
 	_conditions = {}
 End
 
+Var _XDir(string f)
+	Var sf = Split(f,"/")
+	If #sf==1
+		Return ""
+	End
+	return Left(f,#f-#sf[#sf]-1)
+End
+
 Var _Import(string dir,string file)
+	_Imported = _Imported || {}
+	if _Imported[dir:upper().."::"..file:upper()] 
+		print(file," already present. Instant return")
+		Return _Imported[dir:upper().."::"..file:upper()]
+	end
 	if suffixed(file:upper(),".LHL")
 		return _Import(dir,file.."/"..replace(file:upper(),".LHL",".LUA"))
 	end
@@ -34,12 +48,14 @@ Var _Import(string dir,string file)
 		Own = file
 	End
 	Var Lines
+	String MyDir
 	if dir:upper()!="HOME"
 		for F in each{Own,HTe}
 			cout("Checking: ",F,"\n")
 			if JCR6.EntryExists(F)
 				print("= Loading")
 				Lines = JCR6.LoadLines(F)
+				MyDir = _XDir(F)
 				break
 			end
 		end
@@ -61,7 +77,13 @@ Var _Import(string dir,string file)
 			Var CD = Split(lt," ")			
 			Switch CD[2]:lower()
 				Case "*import"
-					code += sprintf("%s = Neil.Globals.Hate.Import('%s','%s.lhl')\n",CD[3],dir,CD[3])
+					//print("Checking: ",CD[3]..".lua")
+					if JCR6.EntryExists(dir.."/"..CD[3]..".lua")
+						code += sprintf("%s = Neil.Globals.Hate.Import('%s','%s.lua')\n",CD[3],dir,CD[3])
+					Else	
+						code += sprintf("%s = Neil.Globals.Hate.Import('%s','%s.lhl')\n",CD[3],dir,CD[3])
+					End
+					
 				Case "*define" 
 					code += "-- DEFINED: "..CD[3]
 					_conditions[CD[3]:upper()]=true
@@ -110,8 +132,11 @@ Var _Import(string dir,string file)
 	// print(code) // debug only!
 	Loaded,Err = Lua.load(code,file)
 	Lua.assert(Loaded,"Hate Import error: "..Lua.tostring(Err))
+	print("= Iniiatlizing")
+	Var Ret = Loaded()
 	print("= Complete")
-	Return Loaded()
+	_Imported[dir:upper().."::"..file:upper()] = Ret
+	Return Ret
 End
 
 Return _Import
