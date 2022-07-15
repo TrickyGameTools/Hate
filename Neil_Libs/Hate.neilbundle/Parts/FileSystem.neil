@@ -18,4 +18,23 @@
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
 Module
+
+	Bool isFile(string F)
+		return (JCR6.EntryExists(F) || HomeFile.Exists(F))
+	End
+
+	Bool isDirectory(string D)
+		return (JCR6.DirExists(D) || HomeFile.DirExists(D)) && (!isFile(D))
+	End
+	
+	Var getDirectoryItems(string d)
+		if JCR6.DirExists(D)
+			return JCR6.GetDirNP(D)
+		ElseIf HomeFile.DirExists(D)
+			Return HomeFile.GetDir(D)
+		Else
+			Return {}
+		End
+	End
+	
 End
