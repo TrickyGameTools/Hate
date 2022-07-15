@@ -2,7 +2,7 @@
 -- Neil_Libs/Hate.neilbundle/Hate/Phantasar.lhl/phantasar.lua
 -- Phantasar
 -- version: 22.07.15
--- Copyright (C) 2016, 2017 Jeroen P. Broks
+-- Copyright (C) 2016, 2017, 2022 Jeroen P. Broks
 -- This software is provided 'as-is', without any express or implied
 -- warranty.  In no event will the authors be held liable for any damages
 -- arising from the use of this software.
