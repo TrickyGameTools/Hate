@@ -6,7 +6,7 @@
 -- Mozilla Public License, v. 2.0. If a copy of the MPL was not
 -- distributed with this file, You can obtain one at
 -- http://mozilla.org/MPL/2.0/.
--- Version: 22.07.15
+-- Version: 22.07.17
 -- </License Block>
 --[[
         lunamorica.lua
@@ -25,7 +25,7 @@
 -- *if ignore
 local mkl = {}
 -- *fi
-mkl.version("Cynthia Johnson - lunamorica.lua","22.07.15")
+mkl.version("Cynthia Johnson - lunamorica.lua","22.07.17")
 mkl.lic    ("Cynthia Johnson - lunamorica.lua","Mozilla Public License 2.0")
 
 

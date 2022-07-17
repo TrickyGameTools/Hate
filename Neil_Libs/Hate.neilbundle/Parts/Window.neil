@@ -1,0 +1,61 @@
+// License Information:
+// Neil_Libs/Hate.neilbundle/Parts/Window.neil
+// Window
+// version: 22.07.17
+// Copyright (C) 2022 Jeroen P. Broks
+// This software is provided 'as-is', without any express or implied
+// warranty.  In no event will the authors be held liable for any damages
+// arising from the use of this software.
+// Permission is granted to anyone to use this software for any purpose,
+// including commercial applications, and to alter it and redistribute it
+// freely, subject to the following restrictions:
+// 1. The origin of this software must not be misrepresented; you must not
+// claim that you wrote the original software. If you use this software
+// in a product, an acknowledgment in the product documentation would be
+// appreciated but is not required.
+// 2. Altered source versions must be plainly marked as such, and must not be
+// misrepresented as being the original software.
+// 3. This notice may not be removed or altered from any source distribution.
+// End License Information
+Module
+	Var getMode()
+		//number width
+		//number height
+		//table flags
+		//	boolean fullscreen
+		//		Fullscreen (true), or windowed (false).
+		//	FullscreenType fullscreentype
+		//	The type of fullscreen mode used.
+		// 	number vsync
+		//	if the graphics framerate is synchronized with the monitor's refresh rate, 0 otherwise.
+		//	number msaa
+		//	The number of antialiasing samples used (0 if MSAA is disabled).
+		//	boolean resizable
+		//	True if the window is resizable in windowed mode, false otherwise.
+		//	boolean borderless
+		//	True if the window is borderless in windowed mode, false otherwise.
+		//	boolean centered
+		//	True if the window is centered in windowed mode, false otherwise.
+		//	number display
+		//	The index of the display the window is currently in, if multiple monitors are available.
+		//	number minwidth
+		//	The minimum width of the window, if it's resizable.
+		//	number minheight
+		//	The minimum height of the window, if it's resizable.
+		
+		// Pleae note, most of all this was never supported simply because I don't need them
+		// And I'm not even planning to put all that in, either.
+		Table Flags
+		Flags = {}
+		Flags.fullscreen = Graphics.IsFullScreen()
+		Flags.vsync = 0
+		Flags.msaa = 0
+		Flags.resizable = false
+		Flags.borderless = false
+		Flags.centered = true
+		Flags.display = 0
+		Flags.minwidth = 5
+		Flags.mineight = 5
+		Return Screen.W,Screen.H,Flags
+	End
+End
