@@ -103,7 +103,11 @@ Var _Import(string dir,string file)
 					condout=false
 					code += "-- fi\n"
 				Default 
-					Lua.error("Unknown hate preprocccssor directive: "..CD[2].." in line #"..ln)
+					if prefixed(CD[2],"**")
+						code += l.."\n" 
+					Else
+						Lua.error("Unknown hate preprocccssor directive: "..CD[2].." in line #"..ln)
+					End
 			End
 		Else
 			//string nl = replace(l,"\\$\\$mydir\\$\\$",MyDir).."\n"
