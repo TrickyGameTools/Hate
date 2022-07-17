@@ -7,7 +7,6 @@
 -- distributed with this file, You can obtain one at
 -- http://mozilla.org/MPL/2.0/.
 -- Version: 22.07.15
--- </License Block>
 --[[
         Gadget_Picture.lua
 	(c) 2017 Jeroen Petrus Broks.
@@ -18,6 +17,8 @@
 	http://mozilla.org/MPL/2.0/.
         Version: 17.11.07
 ]]
+-- </License Block>
+
 local pic = {
 
 
@@ -37,10 +38,10 @@ local pic = {
          if prefixed(g.image,"text:") then
             print('Converting '..g.image..' into a picture')
             local f = g:setfont(true)
-            g.dimage = love.graphics.newText(f,right(g.image,#g.image-5))
+            g.dimage = hate.graphics.newText(f,right(g.image,#g.image-5))
          else   
             print('Loading picture: '..g.image:upper())
-            g.dimage = love.graphics.newImage(g.image:upper())      
+            g.dimage = hate.graphics.newImage(g.image:upper())      
             assert(g.dimage,"Loading picture ("..g.image..") failed")
          end      
          g.iw = g.dimage:getWidth( )
@@ -71,7 +72,7 @@ local pic = {
         local y = g.ay 
         g:color('pic')
         assert(g.image,"Picture gadget without data!")
-        love.graphics.draw(g.dimage,x,y,g.radius,g.sx,g.sy,g.ox,g.oy)
+        hate.graphics.draw(g.dimage,x,y,g.radius,g.sx,g.sy,g.ox,g.oy)
      end
 
 
