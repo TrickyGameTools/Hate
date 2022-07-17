@@ -18,6 +18,7 @@
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
 
+
 class __Hate_Image
 	ReadOnly Var Img
 	
@@ -28,6 +29,7 @@ class __Hate_Image
 	Int getHeight(a)
 		return (a || self).Height
 	End
+		
 
 	
 	Constructor (_Img)
@@ -41,10 +43,21 @@ Module
 	ReadOnly Delegate setColor = Graphics.Color
 	ReadOnly Delegate Clear = Graphics.Cls
 	
+	Get Delegate newFont
+		Return Hate.Font.newFont
+	End
+	
 	Get Var ChosenFont
 		Return Hate.Font.ChosenFont
 	End
 	
+	Int getWidth()
+		return Screen.W
+	end
+	
+	Int getHeight()
+		return Screen.H
+	End
 	
 	Void Print(string text, number x, number y, r, sx, sy, ox, oy, kx, ky )
 		// Note r, sx, sy, ox, oy, kx and ky are not supposrted

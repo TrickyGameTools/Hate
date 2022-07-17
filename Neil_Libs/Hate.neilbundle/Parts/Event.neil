@@ -1,0 +1,6 @@
+module
+	Void Quit(int ec=0)
+		Flow.Quit(ec)
+	End
+end
+	

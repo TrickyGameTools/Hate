@@ -23,9 +23,87 @@ Var True_Hate
 
 Var Hate_Functions
 Bool _Overwrite = False
+Var Hate_Before
+
+pLua Apollo2Hate
+Init
+#pure
+	Apollo2Hate = {
+		MOUSEMOTION     = "MouseMoved",
+		MOUSEBUTTONDOWN = "MousePressed",
+		MOUSEBUTTONUP   = "MouseRelease",
+		KEYDOWN         = "KeyPressed",
+		KEYUP           = "KeyReleased",		
+		TERMINATING	    = "Quit"
+	}
+#endpure
+End
+
 
 Void _Flow()
-	Lua.Crash("I cannot flow yet!") // Placeholder
+	//Lua.error("I cannot flow yet!") // Placeholder
+	plua _hate = Lua.Neil.Globals.Hate
+	
+	// As Hate has to come as close to LOVE2D as possible
+	// The easiest way to go was to adept all this from the original
+
+	// -- Process events.
+	//	if love.event then
+	//		love.event.pump()
+	//		for name, a,b,c,d,e,f in love.event.poll() do
+	do
+		plua etype
+		plua name
+		plua a
+		plua b
+		plua c
+		plua d
+		plua e
+		plua f
+		etype, name, a,b,c,d,e,f = Events.QuickData()
+		do
+			do
+				if name:upper() == "quit" 
+					//if not love.quit or not love.quit() then
+					//	return a or 0
+					//end
+					if Hate_Functions.QUIT=="UNDEFINED"
+						Flow.Quit(0)
+					elseif !Hate_Functions.QUIT()
+						Flow.Quit(0)
+					end
+				end
+				//love.handlers[name](a,b,c,d,e,f)
+				_hate[name](a,b,c,d,e,f)
+			end
+		end
+
+		//-- Update dt, as we'll be passing it to update
+		//if love.timer then dt = love.timer.step() end
+
+		//-- Call update and draw
+		//if love.update then love.update(dt) end -- will pass 0 if love.timer is disabled
+		_hate.update(0)
+		
+
+		//if love.graphics and love.graphics.isActive() then
+		do
+			//love.graphics.origin()
+			//love.graphics.clear(love.graphics.getBackgroundColor())
+			Graphics.Cls()
+
+			//if love.draw then love.draw() end
+			_hate.Draw()
+
+			//love.graphics.present()
+			Graphics.Flip()
+		end
+
+		//if love.timer then
+		do
+			_hate.timer.sleep(0.001) 
+		end
+	end
 End
 
 Bool FunctionMust = False
@@ -36,22 +114,33 @@ End
 QuickMeta _Module_Hate
 
 	newindex
+		Hate_Before = Hate_Before || {}
 		key = key:upper()
 		If key=="OVERWRITE"
 			_Overwrite = Value		
 		Elseif Hate_Functions[key] == "UNDEFINED"
 			Hate_Functions[key] = Value
+			Hate_Before[Key] = debug.traceback()
 		ElseIf _Overwrite && Hate_Functions[key]
-			Hate_Functions[key] = Value		
+			Hate_Functions[key] = Value	
+			Hate_Before[Key] = debug.traceback().." <Overwrite> ";
 		ElseIf !Hate_Functions[key]
 			Lua.error("I do not know anything about "..key)
+		ElseIf Lua.type(Hate_Functions[key])=="function"
+			print("<Before>\n",Hate_Before[Key],"\n</Before>")
+			Lua.error("Call-back "..key.." has been defined before!")
 		Else
-			Lua.error("Hate defition error: "..key.." -> "..Lua.tostring(key))
+			Lua.error("Hate definition error: "..key.." -> "..Lua.tostring(key))
 		End
 	End
 
 	Index
 		key = key:upper()
+		
+		If Apollo2Hate[key]
+			key = Apollo2Hate[key]:upper()
+		End
+		
 		If key=="OVERWRITE"
 			Return _OverWrite
 		ElseIf key=="FLOW"
@@ -71,7 +160,7 @@ End
 
 Init	
 	Hate_Functions = {}
-	For k in Each{"Update","Draw","MouseMoved","KeyPressed","KeyReleased","MousePressed","MouseReleased","Quit"}
+	For k in Each{"Update","Draw","MouseMoved","KeyPressed","KeyReleased","MousePressed","MouseReleased","Quit","Load", "Unknown"}
 		Hate_Functions[k:upper()]="UNDEFINED"
 	End
 End

@@ -33,7 +33,7 @@ mkl.lic    ("Cynthia Johnson - lunamorica.lua","Mozilla Public License 2.0")
 
 -- Lib info
 local lunamorica = {
-  _VERSION     = mkl.data["Love Lua Libraries (LLL) - lunamorica.lua"].version,
+  _VERSION     = mkl.data["Cynthia Johnson - lunamorica.lua"].version,
   _DESCRIPTION = "Lunamorica -- GUI set for Love2d",
   _URL         = "<< comes later >>",
   _LICENSE     = [[
@@ -88,7 +88,6 @@ local defaultconfig = {
                         General = { FR = 0, FG=0, FB=0, BR=127, BG=127, BB=127 }
                       }
 local config = defaultconfig
-
 
 local screen = { x =0, y=0, ax=0, ay=0, w=hate.graphics.getWidth(),h=hate.graphics.getHeight(), kind='Screen'}
 

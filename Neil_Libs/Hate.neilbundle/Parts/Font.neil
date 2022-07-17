@@ -48,8 +48,15 @@ Module
 		_CFont = Value || _DefaultFont
 	End
 	
-	Var newFont(string file)
-		return new Hate_Font(file)
+	Var newFont(file)
+		switch Lua.type(file)
+			case "string"
+				return new Hate_Font(file)
+			case "number"
+				return _DefaultFont
+			default
+				lua.crash("ERROR! On newFont")
+		end
 	End
 	
 	Void setFont(fnt)
