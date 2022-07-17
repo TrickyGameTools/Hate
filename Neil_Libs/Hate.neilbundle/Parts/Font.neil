@@ -17,16 +17,27 @@
 // misrepresented as being the original software.
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
-Var __DefaultFont = ImageFont.Load("Libs/Hate.neilbundle/Assets/DOS_Font.jfbf" ,"__HATE_DOSFONT")
+Var __IDefaultFont = ImageFont.Load("Libs/Hate.neilbundle/Assets/DOS_Font.jfbf" ,"__HATE_DOSFONT")
 
 Class Hate_Font
 	ReadOnly Var IFont
+	
+	Int TextWidth(string t)
+		return IFont.TextWidth(t)
+	End
+
+	Int TextHeight(string t)
+		return IFont.TextWidth(t)
+	End
 	
 	Constructor(A)
 		switch Lua.type(A)
 			case "table"
 				IFont = A
 			case "string"
+				If Suffixed(A:upper(),".TTF")
+					Lua.error(".TTF fonts NOT supported! ("..A..") -- Please convert to JFBF")
+				End
 				IFont = ImageFont.LoadNew(A,"__HATE__FONT__"..(A:upper()))
 			default
 				Lua.error("Unknown font creation type")
@@ -37,22 +48,26 @@ End
 
 
 Module
-	Var _DefaultFont = new Hate_Font(__DefaultFont)
+	Var _DefaultFont = new Hate_Font(__IDefaultFont)
 	Var _CFont
 	
 	Get Var ChosenFont
 		_CFont = _CFont || _DefaultFont
+		Return _CFont
 	End
 	
 	Set Var ChosenFont
 		_CFont = Value || _DefaultFont
 	End
 	
-	Var newFont(file)
+	Var newFont(file,a)
 		switch Lua.type(file)
 			case "string"
+				if Lua.type(a)=="number" 
+					file = Replace(file:upper(),".TTF",sprintf(".%d.JFBF",a))
+				end
 				return new Hate_Font(file)
-			case "number"
+			case "number" "nil" 
 				return _DefaultFont
 			default
 				lua.crash("ERROR! On newFont")
