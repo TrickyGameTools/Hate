@@ -8,16 +8,7 @@
 -- http://mozilla.org/MPL/2.0/.
 -- Version: 22.07.17
 -- </License Block>
---[[
-        lunamorica.lua
-	(c) 2017 Jeroen Petrus Broks.
-	
-	This Source Code Form is subject to the terms of the 
-	Mozilla Public License, v. 2.0. If a copy of the MPL was not 
-	distributed with this file, You can obtain one at 
-	http://mozilla.org/MPL/2.0/.
-        Version: 17.11.17
-]]
+
 
 -- *import mkl
 -- *import strings
@@ -207,13 +198,14 @@ end
 local gadgets = { Screen = {} }
 
 local list = hate.filesystem.getDirectoryItems( "$$mydir$$" )
-for f in each(list) do
+for gf in each(list) do
+	local f = upper(gf)
     local gn = lower(f)
     if prefixed(f,"GADGET_") and suffixed(f,".LUA") then
        gn = left(gn,len(gn)-4)
        gn = right(gn,len(gn)-7)
        print("Initating gadget: "..gn)
-       gadgets[gn]=j_love_import("$$mydir$$/"..f)
+       gadgets[gn]=j_hate_import("$$mydir$$/"..f)
     end
 end
 list = nil       
