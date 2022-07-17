@@ -7,7 +7,6 @@
 -- distributed with this file, You can obtain one at
 -- http://mozilla.org/MPL/2.0/.
 -- Version: 22.07.15
--- </License Block>
 --[[
         Gadget_Button.lua
   (c) 2017 Jeroen Petrus Broks.
@@ -18,6 +17,9 @@
   http://mozilla.org/MPL/2.0/.
         Version: 17.11.19
 ]]
+-- </License Block>
+
+
 -- *import xmath
 
 local function inside(g,x,y)
@@ -44,14 +46,14 @@ local knopje = {
          g.drwlst = {}        
          g.acaption = g:getcaption()
          if g.acaption~="" then 
-            g.t_text.drw = love.graphics.newText(g:setfont(true),g.acaption)
+            g.t_text.drw = hate.graphics.newText(g:setfont(true),g.acaption)
             g.t_text.w   = g.t_text.drw:getWidth()
             g.t_text.h   = g.t_text.drw:getHeight()
             g.drwlst[#g.drwlst+1] = g.t_text
             print("Worked out caption: "..g.acaption)            
          end
          if g.image then
-            g.t_img.drw  = love.graphics.newImage(g.image:upper())
+            g.t_img.drw  = hate.graphics.newImage(g.image:upper())
             g.t_img.w    = g.t_img.drw:getWidth()
             g.t_img.h    = g.t_img.drw:getHeight()
             g.drwlst[#g.drwlst+1] = g.t_img
@@ -79,17 +81,17 @@ local knopje = {
     end,
     
     draw = function(g)
-         local lijn  = love.graphics.line
+         local lijn  = hate.graphics.line
          -- background
          g:color(true)
-         love.graphics.rectangle( 'fill', g.ax, g.ay, g.w, g.h )
+         hate.graphics.rectangle( 'fill', g.ax, g.ay, g.w, g.h )
          for i=1,4 do
              local i2 = i-1
              -- left & top color
              if g.held then 
-                love.graphics.setColor(g.botR,g.botG,g.botB)
+                hate.graphics.setColor(g.botR,g.botG,g.botB)
              else    
-                love.graphics.setColor(g.topR,g.topG,g.topB)
+                hate.graphics.setColor(g.topR,g.topG,g.topB)
              end
              -- left side
              lijn(g.ax+i2,g.ay,g.ax+i2,(g.ay+g.h)-i)
@@ -97,9 +99,9 @@ local knopje = {
              lijn(g.ax,g.ay+i2,g.ax+g.w-i,g.ay+i2)
              -- right & bottom color       
              if g.held then 
-                love.graphics.setColor(g.topR,g.topG,g.topB)
+                hate.graphics.setColor(g.topR,g.topG,g.topB)
              else    
-                love.graphics.setColor(g.botR,g.botG,g.botB)
+                hate.graphics.setColor(g.botR,g.botG,g.botB)
              end
              -- right side
              lijn((g.ax+g.w)-i2,g.ay+i,(g.ax+g.w)-i2,(g.ay+g.h)-1)
@@ -108,8 +110,8 @@ local knopje = {
          end
          --g:color()
          for drw in each(g.drwlst) do
-             love.graphics.setColor(g[drw.cpf.."R"],g[drw.cpf.."G"],g[drw.cpf.."B"])
-             love.graphics.draw(drw.drw,drw.x+g.ax+(g.imgx or 0),drw.y+g.ay+(g.imgy or 0))
+             hate.graphics.setColor(g[drw.cpf.."R"],g[drw.cpf.."G"],g[drw.cpf.."B"])
+             hate.graphics.draw(drw.drw,drw.x+g.ax+(g.imgx or 0),drw.y+g.ay+(g.imgy or 0))
          end  
     end,
     
