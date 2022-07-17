@@ -21,6 +21,8 @@
 
 class __Hate_Image
 	ReadOnly Var Img
+	ReadOnly Var Font
+	ReadOnly string Type
 	
 	Int getWidth(a)
 		return (a || self).Width
@@ -31,17 +33,37 @@ class __Hate_Image
 	End
 	
 	Get int Width
-		Return Img.Width
+		switch Type
+			case "Image"
+				Return Img.Width
+			case "Text"
+				Return Font.TextWidth(Img)
+			Default
+				Return 0
+		End
 	End
 	
 	Get Int Height
-		Return Img.Height
+		switch Type
+			case "Image"
+				Return Img.Height
+			case "Text"
+				Return Font.TextHeight(Img)
+			Default
+				Return 0
+		End
 	End
 		
 
 	
-	Constructor (_Img)
+	Constructor (_Img,_Fnt)
 		Img = _Img
+		if Lua.type(Img)=="string"
+			Type="Text"
+			Font = _Fnt
+		Else
+			Type="Image"
+		End
 	End
 end	
 
@@ -68,11 +90,22 @@ Module
 	End
 	
 	Void draw( drawable,number x, number y, number r=0, number sx=1, number sy=1, number ox=0, number oy=0, number kx=0, number ky=0 )
-		GFX_Rotation.Rad=r
-		Graphics.Scale(sx,sy)
-		drawable.img.hot(ox,oy)
-		drawable.img.xdraw(x,y)
+		switch drawable.type
+			case "Image"
+				GFX_Rotation.Rad=r
+				Graphics.Scale(sx,sy)
+				drawable.img.hot(ox,oy)
+				drawable.img.xdraw(x,y)
+			case "Text"
+				drawable.Font.Text(drawable,x-ox,y-oy)
+			default
+				Self.Print("??? DRAWABLE ???",x,y)
+		end
 	End
+	
+	void Rectangle(string t,number x, number y, number w, number h)
+		Graphics.Rect(math.floor(x),math.floor(y),math.floor(w),math.floor(h),t!="fill")
+	end
 	
 	Void Print(string text, number x, number y, r, sx, sy, ox, oy, kx, ky )
 		// Note r, sx, sy, ox, oy, kx and ky are not supposrted
@@ -81,6 +114,10 @@ Module
 	
 	Var newImage( string filename, settings )
 		return new __Hate_Image(Image.LoadNew(filename,"HATE_IMAGE_"..(filename:upper())))
+	End
+	
+	Var newText(fnt, string txt)
+		Return new __Hate_Image(txt,fnt)
 	End
 	
 End
