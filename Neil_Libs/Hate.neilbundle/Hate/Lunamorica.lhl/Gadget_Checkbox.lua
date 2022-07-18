@@ -6,18 +6,8 @@
 -- Mozilla Public License, v. 2.0. If a copy of the MPL was not
 -- distributed with this file, You can obtain one at
 -- http://mozilla.org/MPL/2.0/.
--- Version: 22.07.15
+-- Version: 22.07.18
 -- </License Block>
---[[
-        Gadget_Checkbox.lua
-	(c) 2017 Jeroen Petrus Broks.
-	
-	This Source Code Form is subject to the terms of the 
-	Mozilla Public License, v. 2.0. If a copy of the MPL was not 
-	distributed with this file, You can obtain one at 
-	http://mozilla.org/MPL/2.0/.
-        Version: 17.08.15
-]]
 
 local function inside(g,x,y)
     return x>g.ax and x<g.ax+g.w and y>g.ay and y<g.ay+g.h
@@ -34,9 +24,9 @@ local vakje_om_aan_te_kruisen = {
       
       draw = function(g)
              g:color()
-             love.graphics.rectangle('line',g.ax,g.ay,g.w,g.h)
+             hate.graphics.rectangle('line',g.ax,g.ay,g.w,g.h)
              if g.checked then
-                love.graphics.rectangle('fill',g.ax+3,g.ay+3,g.w-6,g.h-6)
+                hate.graphics.rectangle('fill',g.ax+3,g.ay+3,g.w-6,g.h-6)
              end   
       end,
       
