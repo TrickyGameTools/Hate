@@ -1,7 +1,7 @@
 // License Information:
 // Neil_Libs/Hate.neilbundle/_NeilBundle.neil
 // I hate you
-// version: 22.07.17
+// version: 22.07.18
 // Copyright (C) 2022 Jeroen P. Broks
 // This software is provided 'as-is', without any express or implied
 // warranty.  In no event will the authors be held liable for any damages
@@ -31,7 +31,7 @@ Init
 	Apollo2Hate = {
 		MOUSEMOTION     = "MouseMoved",
 		MOUSEBUTTONDOWN = "MousePressed",
-		MOUSEBUTTONUP   = "MouseRelease",
+		MOUSEBUTTONUP   = "MouseReleased",
 		KEYDOWN         = "KeyPressed",
 		KEYUP           = "KeyReleased",		
 		TERMINATING	    = "Quit"
@@ -74,6 +74,9 @@ Void _Flow()
 					end
 				end
 				//love.handlers[name](a,b,c,d,e,f)
+				//if (name!="Unknown") 
+				//	print(etype, name, a,b,c,d,e,f)  // debug only
+				//end
 				_hate[name](a,b,c,d,e,f)
 			end
 		end
