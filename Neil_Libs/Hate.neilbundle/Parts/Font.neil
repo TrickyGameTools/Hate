@@ -1,7 +1,7 @@
 // License Information:
 // Neil_Libs/Hate.neilbundle/Parts/Font.neil
 // Font
-// version: 22.07.17
+// version: 22.07.18
 // Copyright (C) 2022 Jeroen P. Broks
 // This software is provided 'as-is', without any express or implied
 // warranty.  In no event will the authors be held liable for any damages
@@ -17,20 +17,37 @@
 // misrepresented as being the original software.
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
-Var __IDefaultFont = ImageFont.Load("Libs/Hate.neilbundle/Assets/DOS_Font.jfbf" ,"__HATE_DOSFONT")
+Var __IDefaultFont 
+//= ImageFont.Load("Libs/Hate.neilbundle/Assets/DOS_Font.jfbf" ,"__HATE_DOSFONT")
 
 Class Hate_Font
 	ReadOnly Var IFont
 	
 	Int TextWidth(string t)
 		return IFont.TextWidth(t)
+		//return 0
 	End
 
 	Int TextHeight(string t)
 		return IFont.TextWidth(t)
+		//return 0
+	End
+	
+	Void Text(a,b,c,d)
+		switch Lua.type(a)
+			case "table"
+				a.IFont.Text(b,c,d)
+			case "number"
+				IFont.Text(Lua.tostring(a),b,c)
+			case "string"
+				IFont.Text(a,math.floor(b || 0),math.floor(c || 0))
+			default
+				IFont.Text("<???>"..Lua.type(a).."<???>",b,c)
+		end
 	End
 	
 	Constructor(A)
+		print("Font created: ",Self,"("..Lua.tostring(a)..")" )
 		switch Lua.type(A)
 			case "table"
 				IFont = A
@@ -48,7 +65,9 @@ End
 
 
 Module
-	Var _DefaultFont = new Hate_Font(__IDefaultFont)
+	
+	
+	Var _DefaultFont
 	Var _CFont
 	
 	Get Var ChosenFont
@@ -66,8 +85,10 @@ Module
 				if Lua.type(a)=="number" 
 					file = Replace(file:upper(),".TTF",sprintf(".%d.JFBF",a))
 				end
+				print( "New font requested: "..file )
 				return new Hate_Font(file)
 			case "number" "nil" 
+				print("Default font requested",_DefaultFont,file)
 				return _DefaultFont
 			default
 				lua.crash("ERROR! On newFont")
@@ -77,5 +98,15 @@ Module
 	Void setFont(fnt)
 		ChosenFont = fnt
 	End
+	
+	Constructor
+		print("Init hate.Font" )
+		Print("Loading system font" )
+		//__IDefaultFont = ImageFont.Load("Libs/Hate.neilbundle/Assets/DOS_Font.jfbf" ,"__HATE_DOSFONT")
+		__IDefaultFont = ImageFont.Load("Hate/SysFont.jfbf" ,"__HATE_DOSFONT")
+		Print("Setting Default Font")
+		_DefaultFont = new Hate_Font(__IDefaultFont)
+	End
+
 	
 End
