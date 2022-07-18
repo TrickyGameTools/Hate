@@ -1,7 +1,7 @@
 // License Information:
 // Neil_Libs/Hate.neilbundle/Parts/Graphics.neil
 // Graphics
-// version: 22.07.17
+// version: 22.07.18
 // Copyright (C) 2022 Jeroen P. Broks
 // This software is provided 'as-is', without any express or implied
 // warranty.  In no event will the authors be held liable for any damages
@@ -61,6 +61,7 @@ class __Hate_Image
 		if Lua.type(Img)=="string"
 			Type="Text"
 			Font = _Fnt
+			print("Created text: ",Img,";",Font)
 		Else
 			Type="Image"
 		End
@@ -70,7 +71,11 @@ end
 
 Module
 	ReadOnly Delegate Line = Graphics.Line
-	ReadOnly Delegate setColor = Graphics.Color
+	
+	Void setColor(number r, number g, number b) 
+		Graphics.Color(math.floor(r) % 256,math.floor(g) % 256,math.floor(b) % 256)
+	End
+	
 	ReadOnly Delegate Clear = Graphics.Cls
 	
 	Get Delegate newFont
@@ -97,7 +102,8 @@ Module
 				drawable.img.hot(ox,oy)
 				drawable.img.xdraw(x,y)
 			case "Text"
-				drawable.Font.Text(drawable,x-ox,y-oy)
+				//print("Using Font: ",drawable.Font) // Debug only!
+				drawable.Font.Text(drawable.Img,x-ox,y-oy)
 			default
 				Self.Print("??? DRAWABLE ???",x,y)
 		end
@@ -110,6 +116,10 @@ Module
 	Void Print(string text, number x, number y, r, sx, sy, ox, oy, kx, ky )
 		// Note r, sx, sy, ox, oy, kx and ky are not supposrted
 		ChosenFont.IFont.Text(Text,math.floor(x),math.floor(y))
+	End
+	
+	Void setFont(fnt)
+		Hate.Font.ChosenFont = fnt
 	End
 	
 	Var newImage( string filename, settings )
