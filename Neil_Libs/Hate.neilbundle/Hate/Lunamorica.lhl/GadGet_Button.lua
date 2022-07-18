@@ -6,17 +6,7 @@
 -- Mozilla Public License, v. 2.0. If a copy of the MPL was not
 -- distributed with this file, You can obtain one at
 -- http://mozilla.org/MPL/2.0/.
--- Version: 22.07.15
---[[
-        Gadget_Button.lua
-  (c) 2017 Jeroen Petrus Broks.
-  
-  This Source Code Form is subject to the terms of the 
-  Mozilla Public License, v. 2.0. If a copy of the MPL was not 
-  distributed with this file, You can obtain one at 
-  http://mozilla.org/MPL/2.0/.
-        Version: 17.11.19
-]]
+-- Version: 22.07.18
 -- </License Block>
 
 
@@ -116,11 +106,14 @@ local knopje = {
     end,
     
     mpressed=function(g,x,y,b,t)
+    	-- print("Button mpressed:",g,x,y,b,t) -- debug only!
        if inside(g,x,y) and b==1 then g.held=true end
     end,
     
     mreleased=function(g,x,y,b,t)
+      --if g.held then print("Button released:",g,x,y,b,t," --> Action: ",g.action," held: ",g.held) end -- debug
       if inside(g,x,y) and b==1 and g.held and g.action then
+         
          g:action()
       end
       g.held=false
