@@ -1,7 +1,7 @@
 -- <License Block>
 -- Neil_Libs/Hate.neilbundle/Hate/Phantasar.lhl/phantasar.lua
 -- Phantasar
--- version: 22.07.17
+-- version: 22.07.18
 -- Copyright (C) 2016, 2017, 2022 Jeroen P. Broks
 -- This software is provided 'as-is', without any express or implied
 -- warranty.  In no event will the authors be held liable for any damages
@@ -33,7 +33,7 @@
 -- *undef dev_shownum
 -- *undef dev_after
 
-mkl.version("Cynthia Johnson - phantasar.lua","22.07.17")
+mkl.version("Cynthia Johnson - phantasar.lua","22.07.18")
 mkl.lic    ("Cynthia Johnson - phantasar.lua","ZLib License")
 
 
@@ -154,9 +154,11 @@ for file in each(list) do
     end
 end
 
-function r.addfile(assetlist,dtype,file,tag,prefix)
+function r.addfile(assetlist,dtype,file,tag2,prefix)
 	assetlist[dtype] = assetlist[dtype] or {}
     print("adding to list:"..file.."  <manual>")
+    local st = mysplit(file,".")
+    local tag = lower(st[1])
     assetlist[dtype][(prefix or "")..(tag or "???")] = file
 end    
 
