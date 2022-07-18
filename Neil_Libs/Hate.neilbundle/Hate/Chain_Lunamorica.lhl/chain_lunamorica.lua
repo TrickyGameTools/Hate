@@ -41,6 +41,8 @@ lunar = {}
 local function deal_event(evnt,a1,a2,a3,a4,a5)
   local cn = chain.currentname  
   if lunar[cn] then
+  	 -- print(evnt) -- debug only
+  	 --Neil.Globals.printf("Chain.%s want event '%s', Param(%s,%s,%s,%s) Available: %s\n",cn,evnt,a1,a2,a3,a4,lunar[cn][evnt]) -- debug only!
      if lunar[cn][evnt] then lunar[cn][evnt](lunar[cn],a1,a2,a3,a5) end
   end
 end        
