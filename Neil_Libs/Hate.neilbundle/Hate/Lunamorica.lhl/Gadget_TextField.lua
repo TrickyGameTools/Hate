@@ -6,7 +6,7 @@
 -- Mozilla Public License, v. 2.0. If a copy of the MPL was not
 -- distributed with this file, You can obtain one at
 -- http://mozilla.org/MPL/2.0/.
--- Version: 22.07.15
+-- Version: 22.07.19
 -- </License Block>
 --[[
         Gadget_TextField.lua
@@ -44,9 +44,9 @@ local tf = {
     
     draw = function(s)
        s:color(true)
-       love.graphics.rectangle( 'fill', s.ax, s.ay, s.w, s.h )
-       local kleur = love.graphics.setColor
-       local lijn  = love.graphics.line
+       hate.graphics.rectangle( 'fill', s.ax, s.ay, s.w, s.h )
+       local kleur = hate.graphics.setColor
+       local lijn  = hate.graphics.line
        kleur(s.topR,s.topG,s.topB,255)
        lijn(s.ax-1,s.ay-1,s.ax+s.w+1,s.ay-1) -- top
        lijn(s.ax-1,s.ay-1,s.ax-1,s.ay+s.h+1) -- left
@@ -54,23 +54,28 @@ local tf = {
        lijn(s.ax,s.ay+s.h+1,s.ax+s.w+1,s.ay+s.h+1) -- bottom
        lijn(s.ax+s.w+1,s.ay+s.h+1,s.ax+s.w+1,s.ay) -- right
        local cursor = lun_active == s and s.enabled
-       local time = math.floor(love.timer.getTime()*1.5)
+       local time = math.floor(hate.timer.getTime()*1.5)
        local l = tonumber(right(time,1)) or 0
        cursor = cursor and l<5
        local show = s.text
        if cursor then show = show .. s.cursor end
        s:color(false)
-       love.graphics.print(show,s.ax+1,s.ay+1)
+       hate.graphics.print(show,s.ax+1,s.ay+1)
     end,
     
     kpressed = function(s,key,scancode)
        -- print("User pressed: "..key) -- I need to make sure I got all keys right.
+       key = key:lower()
        if s~=lun_active then return end
        local ch
        local xd = lunamorica.xdown
+       local Events = Neil.Globals.Events
        if #key==1 then
           ch=key
-          if xd.shift then 
+          --if xd.shift then
+          local LeftShift = Events.KeyByName("Left Shift")
+          local RightShift = Events.KeyByName("Right Shift")
+          if Events.KeyDown(LeftShift) or Events.KeyDown(RightShift) then
              ch = ch:upper()
              -- I took the standard QWERTY keyboard in mind. This would otherwise be too much hassle to deal with. Sorry!
              if ch=='`'  then ch="~" end
