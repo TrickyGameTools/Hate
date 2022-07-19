@@ -1,7 +1,7 @@
 // License Information:
 // Neil_Libs/Hate.neilbundle/Parts/Audio.neil
 // Audio (Hate)
-// version: 22.07.17
+// version: 22.07.19
 // Copyright (C) 2022 Jeroen P. Broks
 // This software is provided 'as-is', without any express or implied
 // warranty.  In no event will the authors be held liable for any damages
@@ -43,5 +43,9 @@ Module
 	Var NewSource(string f,t)
 		// t = ignored.
 		return new __Hate_Sound(Audio.Load(f,"HATE:"..f:upper()))
+	End
+	
+	Void Play(src)
+		src.Audio.Play()
 	End
 End
