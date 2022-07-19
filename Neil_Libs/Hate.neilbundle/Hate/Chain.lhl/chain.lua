@@ -1,7 +1,7 @@
 -- <License Block>
 -- Neil_Libs/Hate.neilbundle/Hate/Chain.lhl/chain.lua
 -- Chain
--- version: 22.07.17
+-- version: 22.07.19
 -- Copyright (C) 2016, 2017, 2022 2016, 2017
 -- This software is provided 'as-is', without any express or implied
 -- warranty.  In no event will the authors be held liable for any damages
@@ -27,7 +27,7 @@
 local hate = {}   -- This was only meant to fool the outliner in my Lua IDE.
 -- *fi
 
-mkl.version("Cynthia Johnson - chain.lua","22.07.17")
+mkl.version("Cynthia Johnson - chain.lua","22.07.19")
 mkl.lic    ("Cynthia Johnson - chain.lua","ZLib License")
 
 local chain={ current=nil, currentname=nil, map={}, x = {}, nothing = function() end}
