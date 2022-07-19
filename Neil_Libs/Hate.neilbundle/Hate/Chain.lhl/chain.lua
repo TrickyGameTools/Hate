@@ -59,6 +59,7 @@ function hate.mousemoved(x,y,dx,dy)
 end 
 
 function hate.keypressed(key,scan,repeated)
+	--print("Keypressed(",key,scan,repeated,")")
 	keypressed[key] = true
 	scankeypressed[scan] = true
 	if chain.x.keypressed then chain.x.keypressed(key,scan,repeated) end
