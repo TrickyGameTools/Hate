@@ -6,7 +6,7 @@
 -- Mozilla Public License, v. 2.0. If a copy of the MPL was not
 -- distributed with this file, You can obtain one at
 -- http://mozilla.org/MPL/2.0/.
--- Version: 22.07.17
+-- Version: 22.07.19
 -- </License Block>
 
 
@@ -16,7 +16,7 @@
 -- *if ignore
 local mkl = {}
 -- *fi
-mkl.version("Cynthia Johnson - lunamorica.lua","22.07.17")
+mkl.version("Cynthia Johnson - lunamorica.lua","22.07.19")
 mkl.lic    ("Cynthia Johnson - lunamorica.lua","Mozilla Public License 2.0")
 
 
@@ -106,6 +106,7 @@ end
 -- If you have gadgets using this (like textfields) you need this routine or the keys will be ignored.
 -- You can also set "donotrecurse" if you have a very limited number of textfields or other gadgets requiring keyboard control in order to have optimal performance.  
 local function lv_keypressed(self,k,sc,donotrecurse)
+	--print(" lv_keypressed(",self,k,sc,donotrecurse,")")
    if self.visible and self.enabled then
       if self.lf_kpressed then self:lf_kpressed(k,sc) end
       if not donotrecurse then for id,kid in self.serial(self.kids) do kid:keypressed(k,sc) end end
