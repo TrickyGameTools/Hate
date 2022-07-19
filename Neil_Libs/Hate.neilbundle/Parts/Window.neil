@@ -1,7 +1,7 @@
 // License Information:
 // Neil_Libs/Hate.neilbundle/Parts/Window.neil
 // Window
-// version: 22.07.17
+// version: 22.07.19
 // Copyright (C) 2022 Jeroen P. Broks
 // This software is provided 'as-is', without any express or implied
 // warranty.  In no event will the authors be held liable for any damages
@@ -57,5 +57,11 @@ Module
 		Flags.minwidth = 5
 		Flags.mineight = 5
 		Return Screen.W,Screen.H,Flags
+	End
+	
+	
+	Bool showMessageBox(string title,string message,string type="info", attachtowindow )
+		Sys.Notify(Message,title)
+		Return True
 	End
 End
