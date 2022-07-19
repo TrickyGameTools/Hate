@@ -6,18 +6,9 @@
 -- Mozilla Public License, v. 2.0. If a copy of the MPL was not
 -- distributed with this file, You can obtain one at
 -- http://mozilla.org/MPL/2.0/.
--- Version: 22.07.15
+-- Version: 22.07.18
 -- </License Block>
---[[
-        Gadget_Label.lua
-	(c) 2017 Jeroen Petrus Broks.
-	
-	This Source Code Form is subject to the terms of the 
-	Mozilla Public License, v. 2.0. If a copy of the MPL was not 
-	distributed with this file, You can obtain one at 
-	http://mozilla.org/MPL/2.0/.
-        Version: 17.07.27
-]]
+
 local labeltjesplakken = {
 
 
@@ -38,7 +29,7 @@ local labeltjesplakken = {
         local y = g.ay 
         g:color()
         g:setfont()
-        love.graphics.print(g:getcaption(),x,y,g.radius or 0)
+        hate.graphics.print(g:getcaption(),x,y,g.radius or 0)
      end
 
 
