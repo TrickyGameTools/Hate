@@ -77,7 +77,9 @@ Void _Flow()
 				//if (name!="Unknown") 
 				//	print(etype, name, a,b,c,d,e,f)  // debug only
 				//end
-				_hate[name](a,b,c,d,e,f)
+				if !Prefixed(name,"UNKNOWN") 
+					_hate[name](a,b,c,d,e,f)
+				end
 			end
 		end
 
@@ -154,6 +156,9 @@ QuickMeta _Module_Hate
 		ElseIf Hate_Functions[key]
 			Return Hate_Functions[key]
 		Else
+			if Prefixed(key,"UNKNOWN")
+				Return _Niks
+			end
 			True_Hate = True_Hate || UWN("Libs/Hate.NeilBundle/Parts")
 			Return True_Hate[key]
 		End
@@ -163,7 +168,7 @@ End
 
 Init	
 	Hate_Functions = {}
-	For k in Each{"Update","Draw","MouseMoved","KeyPressed","KeyReleased","MousePressed","MouseReleased","Quit","Load", "Unknown"}
+	For k in Each{"Update","Draw","MouseMoved","KeyPressed","KeyReleased","MousePressed","MouseReleased","Quit","Load", "Unknown","FirstEvent"}
 		Hate_Functions[k:upper()]="UNDEFINED"
 	End
 End
