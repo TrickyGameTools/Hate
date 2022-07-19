@@ -1,7 +1,7 @@
 // License Information:
 // Neil_Libs/Hate.neilbundle/Parts/Font.neil
 // Font
-// version: 22.07.18
+// version: 22.07.19
 // Copyright (C) 2022 Jeroen P. Broks
 // This software is provided 'as-is', without any express or implied
 // warranty.  In no event will the authors be held liable for any damages
@@ -29,7 +29,7 @@ Class Hate_Font
 	End
 
 	Int TextHeight(string t)
-		return IFont.TextWidth(t)
+		return IFont.TextHeight(t)
 		//return 0
 	End
 	
