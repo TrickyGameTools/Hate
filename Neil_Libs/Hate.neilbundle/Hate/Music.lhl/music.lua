@@ -40,6 +40,7 @@ if mozart.optional and (not love.filesystem.isFile(file)) then
 end   
 if mozart.source then StopSound(mozart.source) end
 mozart.source = LoadSound(file,true,mode or 'stream')
+mozart.source.source.SetLooping(true)
 PlaySound(mozart.source)
 mozart.file=file
 end

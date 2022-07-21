@@ -42,11 +42,11 @@ End
 Module
 	Var NewSource(string f,t)
 		// t = ignored.
-		return new __Hate_Sound(Audio.Load(f,"HATE:"..f:upper()))
+		return new __Hate_Sound(Audio.Load(f,"HATE:"..f:upper()))		
 	End
 	
 	Void Play(src)
-		src.Audio.Play()
+		src.Audio.Play(src.Looping)
 	End
 	
 	Void Stop()
