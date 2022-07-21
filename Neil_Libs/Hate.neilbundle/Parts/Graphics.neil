@@ -130,4 +130,6 @@ Module
 		Return new __Hate_Image(txt,fnt)
 	End
 	
+	ReadOnly Delegate Present = Graphics.Flip
+	
 End
