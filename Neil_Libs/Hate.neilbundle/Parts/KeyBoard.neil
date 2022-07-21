@@ -1,0 +1,57 @@
+// License Information:
+// Neil_Libs/Hate.neilbundle/Parts/KeyBoard.neil
+// Keyboard
+// version: 22.07.20
+// Copyright (C) 2022 Jeroen P. Broks
+// This software is provided 'as-is', without any express or implied
+// warranty.  In no event will the authors be held liable for any damages
+// arising from the use of this software.
+// Permission is granted to anyone to use this software for any purpose,
+// including commercial applications, and to alter it and redistribute it
+// freely, subject to the following restrictions:
+// 1. The origin of this software must not be misrepresented; you must not
+// claim that you wrote the original software. If you use this software
+// in a product, an acknowledgment in the product documentation would be
+// appreciated but is not required.
+// 2. Altered source versions must be plainly marked as such, and must not be
+// misrepresented as being the original software.
+// 3. This notice may not be removed or altered from any source distribution.
+// End License Information
+// Please note! This is is NOT complete!
+// I only added those I could need in the game in question
+Group HateKeys
+	readonly int up = Events.KeyByName("Up")
+	readonly int down = Events.KeyByName("Down")
+	readonly int left = Events.KeyByName("Left")
+	readonly int right = Events.KeyByName("Right")
+
+	readonly int pageup = Events.KeyByName("PageUp")
+	readonly int pagedown = Events.KeyByName("PageDown")
+	readonly int backspace = Events.KeyByName("Backspace")
+	readonly int leftshift = Events.KeyByName("Left Shift")
+	readonly int rightshift = Events.KeyByName("Right Shift")
+	readonly int lshift  = Events.KeyByName("Left Shift")
+	readonly int rshift = Events.KeyByName("Right Shift")
+	readonly int lctrl = Events.KeyByName("Left Ctrl")
+	readonly int rctrl = Events.KeyByName("Right Ctrl")
+	readonly int lgui = Events.KeyByName("Left Gui")
+	readonly int rgui = Events.KeyByName("Right Gui")
+	
+	
+	
+	readonly int W = Events.KeyByName("W")
+	readonly int A = Events.KeyByName("A")
+	readonly int S = Events.KeyByName("S")
+	readonly int D = Events.KeyByName("D")
+	
+End
+
+Module
+	Bool IsDown(string k)
+		if k:byte()>=48 && k:byte()<=57
+			return Events.KeyDown(k)
+		else
+			return Events.Keydown(HateKeys[k])
+		End
+	End
+End
