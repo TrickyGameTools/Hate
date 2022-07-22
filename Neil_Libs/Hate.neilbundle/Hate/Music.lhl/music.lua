@@ -1,7 +1,7 @@
 -- <License Block>
 -- Neil_Libs/Hate.neilbundle/Hate/Music.lhl/music.lua
 -- Music
--- version: 22.07.17
+-- version: 22.07.22
 -- Copyright (C) 2016-2017, 2022 Jeroen P. Broks
 -- This software is provided 'as-is', without any express or implied
 -- warranty.  In no event will the authors be held liable for any damages
@@ -21,7 +21,7 @@
 -- *import mkl
 -- *import audio
 
-mkl.version("Cynthia Johnson - music.lua","22.07.17")
+mkl.version("Cynthia Johnson - music.lua","22.07.22")
 mkl.lic    ("Cynthia Johnson - music.lua","ZLib License")
 
 local mozart = {}
