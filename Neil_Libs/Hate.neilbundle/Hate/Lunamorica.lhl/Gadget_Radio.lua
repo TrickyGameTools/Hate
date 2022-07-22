@@ -6,7 +6,7 @@
 -- Mozilla Public License, v. 2.0. If a copy of the MPL was not
 -- distributed with this file, You can obtain one at
 -- http://mozilla.org/MPL/2.0/.
--- Version: 22.07.15
+-- Version: 22.07.22
 -- </License Block>
 --[[
         Gadget_Radio.lua
@@ -24,6 +24,7 @@ local function inside(g,x,y)
     return x>g.ax and x<g.ax+g.w and y>g.ay and y<g.ay+g.h
 end    
 
+local circle = Neil.Globals.Graphics.Circle
 
 local radio_gaga_radio_blahblah = {
 
@@ -41,9 +42,14 @@ local radio_gaga_radio_blahblah = {
       
       draw = function(g)
              g:color()
-             altellipse('line',g.ax,g.ay,g.w,g.h)
+             --altellipse('line',g.ax,g.ay,g.w,g.h)
+             local r = g.h // 2
+             local mx = g.ax + r
+             local my = g.ay + r
+             circle(mx,my,r)
              if g.checked then
-                altellipse('fill',g.ax+3,g.ay+3,g.w-6,g.h-6)
+                --altellipse('fill',g.ax+3,g.ay+3,g.w-6,g.h-6)
+                circle(mx,my,r-3)
              end   
       end,
       
