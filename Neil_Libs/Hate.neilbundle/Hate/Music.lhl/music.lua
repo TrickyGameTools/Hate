@@ -34,7 +34,7 @@ function mozart.play(file,mode)
 mozart.config = mozart.config or {music=true}
 if mozart.source and (not mozart.config.music) then mozart.file=nil; StopSound(mozart.source) return end -- If music is set not to play, it won't play!
 if mozart.source and mozart.file==file then return end -- If the same music is already playing, no need to play it again, right?
-if mozart.optional and (not love.filesystem.isFile(file)) then 
+if (not mozart.optional) and (not hate.filesystem.isFile(file)) then 
    print("File: "..file.." does not exist, but that doesn't matter, as the engine was set to have this as an optional thing anyway")
    return
 end   
